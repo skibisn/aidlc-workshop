@@ -1,0 +1,226 @@
+/* Design System */
+:root {
+  --primary: #232f3e;
+  --secondary: #ff9900;
+  --accent: #0073bb;
+  --bg: #f0f2f2;
+  --card-bg: #ffffff;
+  --border: #d5dbdb;
+  --text: #16191f;
+  --text-muted: #5f6b7a;
+  --success: #1a7a3c;
+  --warning: #c47a00;
+  --danger: #c0392b;
+  --radius: 8px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-hover: 0 4px 14px rgba(0,0,0,0.15);
+
+  /* 상태 색상 */
+  --status-pending-bg: #fff3f2;
+  --status-pending-text: #c0392b;
+  --status-pending-border: #f5b7b1;
+  --status-preparing-bg: #fff8e6;
+  --status-preparing-text: #c47a00;
+  --status-preparing-border: #fad7a0;
+  --status-completed-bg: #eafaf1;
+  --status-completed-text: #1a7a3c;
+  --status-completed-border: #a9dfbf;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ── Navbar ── */
+.navbar {
+  background: var(--primary);
+  color: white;
+  padding: 0 20px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+}
+.navbar-brand { font-size: 15px; font-weight: 700; color: var(--secondary); letter-spacing: -0.3px; }
+.navbar-actions { display: flex; gap: 6px; align-items: center; }
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 36px; padding: 0 16px;
+  border: none; border-radius: var(--radius);
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+  text-decoration: none; gap: 5px; white-space: nowrap;
+}
+.btn:active:not(:disabled) { transform: scale(0.97); }
+.btn-primary { background: var(--secondary); color: var(--primary); }
+.btn-primary:hover:not(:disabled) { background: #e68900; box-shadow: 0 2px 8px rgba(255,153,0,0.4); }
+.btn-secondary { background: white; color: var(--text); border: 1px solid var(--border); }
+.btn-secondary:hover:not(:disabled) { background: var(--bg); border-color: #aab; }
+.btn-danger { background: var(--danger); color: white; }
+.btn-danger:hover:not(:disabled) { background: #a93226; }
+.btn-success { background: var(--success); color: white; }
+.btn-success:hover:not(:disabled) { background: #156030; }
+.btn-sm { min-height: 28px; padding: 0 10px; font-size: 12px; }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn-full { width: 100%; }
+
+/* ── Cards ── */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+.card:hover { box-shadow: var(--shadow-hover); }
+.card-header {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  font-weight: 700;
+  font-size: 13px;
+  background: #fafbfc;
+}
+.card-body { padding: 14px 16px; }
+
+/* ── Status Badges ── */
+.badge {
+  display: inline-flex; align-items: center;
+  padding: 3px 10px; border-radius: 12px;
+  font-size: 12px; font-weight: 700; border: 1px solid transparent;
+  transition: background 0.3s, color 0.3s;
+}
+.badge-pending {
+  background: var(--status-pending-bg);
+  color: var(--status-pending-text);
+  border-color: var(--status-pending-border);
+}
+.badge-preparing {
+  background: var(--status-preparing-bg);
+  color: var(--status-preparing-text);
+  border-color: var(--status-preparing-border);
+}
+.badge-completed {
+  background: var(--status-completed-bg);
+  color: var(--status-completed-text);
+  border-color: var(--status-completed-border);
+}
+
+/* ── Status 변화 애니메이션 ── */
+@keyframes statusFlash {
+  0%   { opacity: 0.4; transform: scale(0.95); }
+  50%  { opacity: 1;   transform: scale(1.05); }
+  100% { opacity: 1;   transform: scale(1); }
+}
+.status-changed { animation: statusFlash 0.4s ease-out; }
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.slide-in { animation: slideIn 0.25s ease-out; }
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+/* ── Form ── */
+.form-group { margin-bottom: 14px; }
+.form-label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 5px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.3px; }
+.form-input {
+  width: 100%; min-height: 38px; padding: 0 12px;
+  border: 1px solid var(--border); border-radius: var(--radius);
+  font-size: 14px; outline: none; transition: border 0.15s, box-shadow 0.15s;
+  background: white;
+}
+.form-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,115,187,0.12); }
+
+/* ── Page layout ── */
+.page { max-width: 1100px; margin: 0 auto; padding: 20px 16px; }
+.page-title { font-size: 20px; font-weight: 700; margin-bottom: 16px; color: var(--text); }
+
+/* ── Grid ── */
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+
+/* ── Alert ── */
+.alert { padding: 12px 16px; border-radius: var(--radius); font-size: 13px; margin-bottom: 16px; border: 1px solid transparent; }
+.alert-error { background: var(--status-pending-bg); color: var(--danger); border-color: var(--status-pending-border); }
+.alert-success { background: var(--status-completed-bg); color: var(--success); border-color: var(--status-completed-border); }
+
+/* ── Tabs ── */
+.tabs { display: flex; gap: 4px; overflow-x: auto; padding-bottom: 4px; margin-bottom: 20px; }
+.tab {
+  min-height: 34px; padding: 0 16px;
+  border: 1px solid var(--border); border-radius: 20px;
+  background: white; font-size: 13px; font-weight: 600;
+  cursor: pointer; white-space: nowrap; transition: all 0.15s;
+}
+.tab.active { background: var(--primary); color: white; border-color: var(--primary); }
+.tab:hover:not(.active) { background: var(--bg); border-color: #aab; }
+
+/* ── Modal ── */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 200; padding: 16px;
+  backdrop-filter: blur(2px);
+}
+.modal {
+  background: white; border-radius: 12px;
+  width: 100%; max-width: 480px;
+  max-height: 90vh; overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  animation: slideIn 0.2s ease-out;
+}
+.modal-header {
+  padding: 18px 24px 14px;
+  border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.modal-title { font-size: 16px; font-weight: 700; }
+.modal-body { padding: 20px 24px; }
+.modal-footer { padding: 14px 24px; border-top: 1px solid var(--border); display: flex; gap: 8px; justify-content: flex-end; }
+
+/* ── Table ── */
+.table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.table th { background: #f5f6f7; padding: 9px 12px; text-align: left; font-size: 11px; font-weight: 700; color: var(--text-muted); border-bottom: 2px solid var(--border); text-transform: uppercase; letter-spacing: 0.3px; }
+.table td { padding: 9px 12px; border-bottom: 1px solid var(--border); }
+.table tr:last-child td { border-bottom: none; }
+.table tr:hover td { background: #f8f9fa; }
+
+/* ── Divider ── */
+.divider { border: none; border-top: 1px solid var(--border); margin: 14px 0; }
+
+/* ── Empty state ── */
+.empty-state { text-align: center; padding: 40px 16px; color: var(--text-muted); }
+.empty-state-icon { font-size: 40px; margin-bottom: 10px; opacity: 0.6; }
+.empty-state-text { font-size: 14px; font-weight: 500; }
+
+/* ── 주문 상태 행 배경 ── */
+.order-row-pending   { border-left: 4px solid var(--status-pending-text) !important; }
+.order-row-preparing { border-left: 4px solid var(--status-preparing-text) !important; }
+.order-row-completed { border-left: 4px solid var(--status-completed-text) !important; opacity: 0.7; }
+
+/* ── 신규 주문 강조 ── */
+@keyframes newOrderPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(192,57,43,0.5); }
+  70%  { box-shadow: 0 0 0 8px rgba(192,57,43,0); }
+  100% { box-shadow: 0 0 0 0 rgba(192,57,43,0); }
+}
+.new-order { animation: newOrderPulse 1.5s ease-out 2; }
